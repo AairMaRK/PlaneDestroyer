@@ -1,0 +1,4 @@
+public enum Images
+{
+    ENEMY, ENEMY_GUNSHOT, PLAYER, PLAYER_GUNSHOT, BACKGROUND;
+}
