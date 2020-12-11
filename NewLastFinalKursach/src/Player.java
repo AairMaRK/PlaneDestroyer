@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
@@ -45,12 +44,12 @@ public class Player extends Sprite implements Serializable
     @Override
     public void draw(Graphics g, GameField gameField, BufferedImage bufferedImage) {
         try {
-            g.drawImage(bufferedImage, gameField.player.getX(), gameField.player.getY(), gameField);
+            g.drawImage(bufferedImage, gameField.gameBase.player.getX(), gameField.gameBase.player.getY(), gameField);
         } catch (Exception EXC) {}
     }
 
     @Override
     public void update(GameField gameField) {
-        gameField.player.move();
+        gameField.gameBase.player.move();
     }
 }

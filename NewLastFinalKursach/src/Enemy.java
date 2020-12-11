@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
@@ -53,26 +52,26 @@ public class Enemy extends Sprite implements Serializable
 
     @Override
     public void draw(Graphics g, GameField gameField, BufferedImage bufferedImage) {
-        for(int i = 0; i < gameField.enemies.toArray().length; i++) {
-            Enemy enemy = gameField.enemies.get(i);
+        for(int i = 0; i < gameField.gameBase.enemies.toArray().length; i++) {
+            Enemy enemy = gameField.gameBase.enemies.get(i);
             if(enemy.isVisiable()) {
                 try{
                     g.drawImage(bufferedImage, enemy.x, enemy.y, gameField);
                 } catch (Exception EXC) {}
             } else {
                 enemy.die();
-                gameField.enemies.remove(enemy);
+                gameField.gameBase.enemies.remove(enemy);
             }
         }
     }
 
     @Override
     public void update(GameField gameField) {
-        for(Enemy enemy : gameField.enemies) {
+        for(Enemy enemy : gameField.gameBase.enemies) {
             enemy.move();
-            if((enemy.x == Values.FIELD_HEIGHT-gameField.player.y-enemy.y && moveRight == false) || (enemy.x == gameField.player.x) || (Values.FIELD_WIDTH-gameField.player.x-enemy.x == Values.FIELD_HEIGHT-gameField.player.y-enemy.y && moveRight == true)) {
+            if((enemy.x == Values.FIELD_HEIGHT-gameField.gameBase.player.y-enemy.y && moveRight == false) || (enemy.x == gameField.gameBase.player.x) || (Values.FIELD_WIDTH-gameField.gameBase.player.x-enemy.x == Values.FIELD_HEIGHT-gameField.gameBase.player.y-enemy.y && moveRight == true)) {
                 EnemyGunshot enemyGunshot = new EnemyGunshot(enemy.x, enemy.y, 3);
-                gameField.enemyGunshots.add(enemyGunshot);
+                gameField.gameBase.enemyGunshots.add(enemyGunshot);
             }
         }
     }

@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
@@ -26,26 +25,26 @@ public class PlayerGunshot extends Sprite implements Serializable
 
     @Override
     public void draw(Graphics g, GameField gameField, BufferedImage bufferedImage) {
-        for(int i = 0; i < gameField.playerGunshots.toArray().length; i++) {
-            PlayerGunshot shot = gameField.playerGunshots.get(i);
+        for(int i = 0; i < gameField.gameBase.playerGunshots.toArray().length; i++) {
+            PlayerGunshot shot = gameField.gameBase.playerGunshots.get(i);
             if(shot.isVisiable()) {
                 try {
                     g.drawImage(bufferedImage, shot.x, shot.y, gameField);
                 } catch (Exception EXC) {}
             } else {
                 shot.die();
-                gameField.playerGunshots.remove(shot);
+                gameField.gameBase.playerGunshots.remove(shot);
             }
         }
     }
 
     @Override
     public void update(GameField gameField) {
-        for(PlayerGunshot shot : gameField.playerGunshots) {
+        for(PlayerGunshot shot : gameField.gameBase.playerGunshots) {
             shot.move();
         }
-        for(Enemy enemy : gameField.enemies) {
-            for(PlayerGunshot shot : gameField.playerGunshots) {
+        for(Enemy enemy : gameField.gameBase.enemies) {
+            for(PlayerGunshot shot : gameField.gameBase.playerGunshots) {
                 if(shot.y >= enemy.y && shot.x >= enemy.x && shot.y <= enemy.y+Values.ENEMY_HEIGHT && shot.x <= enemy.x+Values.ENEMY_WIDTH) {
                     shot.setVisiable(false);
                     enemy.setVisiable(false);
